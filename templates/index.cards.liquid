@@ -1,0 +1,151 @@
+{% assign default_icon = 'images/icon.svg' | asset_url %}
+{% assign default_hero = 'images/demo/jason-goodman-6awfTPLGaCE-unsplash.jpg' | asset_url %}
+{% assign card_pages = site.pages['/'].children_in_nav_menu  | limit: 24 %}
+{% assign faq_pages = site.pages['/faq'].children_in_nav_menu  | limit: 8 %}
+
+<!-- Hero Section with Search -->
+<div class="bg-gradient-to-r from-primary to-primary-600 pt-12 pb-24 lg:pt-20 lg:pb-60">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="max-w-2xl mx-auto text-center">
+            <h1 class="text-3xl font-bold text-white mb-8">{{ page.settings.slogan |  default: 'How can we help you?' }}</h1>
+            <div class="relative">
+                {% form_tag 'search', class: '' %}
+                    <input 
+                        type="text" 
+                        name="{{form.keywords_field_name}}" value="{{ search.keywords | escape_once }}"
+                        placeholder="{{ "placeholders.search" | t }}"
+                        class="w-full px-4 py-3 rounded-lg bg-white shadow-md focus:outline-none focus:ring-2 focus:ring-primary-300"
+                    >
+                    <div class="absolute inset-y-0 right-0 flex items-center pr-4">
+                        <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                    </div>
+                {% endform_tag %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<main class="py-12">
+    <!-- Topics Section -->
+    <section class="mx-auto max-w-7xl px-4 -mt-24 lg:-mt-44">
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- Topic Cards -->
+            {% for card_page in card_pages in  %}
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="p-3 lg:p-6 flex">
+                        <img src="{{ card_page.settings.icon |  default: default_icon }}" class="flex-1 h-12 lg:h-20 p-2 max-w-28">
+                        <div class="flex-auto">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-3">{{ card_page.link_text }}</h2>
+                            <p class="text-gray-600 mb-6">{{ card_page.settings.description }}</p>
+                            <ul class="space-y-2">
+                                {% for sub_page in card_page.children_in_nav_menu | limit: 5  %}
+                                    <li>
+                                        <a href="{{ sub_page.path }}" class="flex items-center space-x-2 text-gray-700">
+                                            <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                                <path d="M15 16H9a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2z"/>
+                                                <path d="M9 14h3a1 1 0 0 0 0-2H9a1 1 0 0 0 0 2z"/>
+                                                <path d="M19.74 8.33l-5.44-6a1 1 0 0 0-.74-.33h-7A2.53 2.53 0 0 0 4 4.5v15A2.53 2.53 0 0 0 6.56 22h10.88A2.53 2.53 0 0 0 20 19.5V9a1 1 0 0 0-.26-.67zM14 5l2.74 3h-2a.79.79 0 0 1-.74-.85zm3.44 15H6.56a.53.53 0 0 1-.56-.5v-15a.53.53 0 0 1 .56-.5H12v3.15A2.79 2.79 0 0 0 14.71 10H18v9.5a.53.53 0 0 1-.56.5z"/>
+                                            </svg>
+                                            <span>{{ sub_page.link_text }}</span>
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="bg-gray-50 py-12 mt-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-gray-900 mb-8">FAQ</h2>
+            <div class="max-w-3xl mx-auto space-y-4">
+                {% for faq_page in faq_pages %}
+                    <a href="{{ faq_page.path }}" class="block bg-white rounded-lg shadow-sm p-4 hover:shadow-md transition-shadow">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-700">{{ faq_page.link_text }}</span>
+                            <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M10.5 17a1 1 0 0 1-.71-.29 1 1 0 0 1 0-1.42L13.1 12 9.92 8.69a1 1 0 0 1 0-1.41 1 1 0 0 1 1.42 0l3.86 4a1 1 0 0 1 0 1.4l-4 4a1 1 0 0 1-.7.32z"/>
+                            </svg>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+            <div class="text-center mt-8">
+                <a href="/faq" class="inline-block px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary-700 transition-colors">
+                    {{ 'generic.read_more' | t }}
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Contact CTA -->
+<section class="my-0 lg:my-12">
+    <div class="max-w-7xl mx-auto px-4 lg:px-12 bg-primary text-white py-4 lg:py-12 rounded-lg">
+        <div class="flex flex-col md:flex-row items-center justify-between">
+            <div class="text-center md:text-left mb-6 md:mb-0">
+                <h2 class="text-2xl font-bold mb-2">Need help?</h2>
+                <p class="text-primary-100">Have you any question which is not answered in this knowledge base? Contact us. We are here to help you.</p>
+            </div>
+            <a href="/contact" class="px-6 py-3 bg-white text-primary-600 rounded-lg hover:bg-primary-50 transition-colors">
+                Contact us
+            </a>
+        </div>
+    </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Cards Style",
+    "description": "index with icon cards",
+    "thumb_url": "images/theme/index.png",
+    "preview_image_urls": [
+      "images/theme/index.png"
+    ],
+    "sub_page_templates": ["page"],
+    "settings": [
+        {
+          "id": "hero_image_url",
+          "type": "image_picker",
+          "ratio": "19:6",
+          "width": 900,
+          "label": "t:settings_schema.generic.settings.hero_image_url.label",
+          "info": "t:settings_schema.generic.settings.hero_image_url.info"
+        },
+        {
+          "id": "slogan",
+          "type": "text",
+          "label": "站点首页口号",
+          "default": "Frequently Asked Questions"
+        },
+        {
+          "id": "description",
+          "type": "textarea",
+          "label": "站点首页一句话描述",
+          "default": "👋 What Can We Help?"
+        },
+        {
+          "id": "tags",
+          "type": "tag_picker",
+          "multiple": true,
+          "label": "t:settings_schema.page.settings.tags.label"
+        },
+        {
+          "id": "features_html",
+          "type": "html",
+          "label": "自定义 HTML块",
+          "info": "显示在列表页脚部分",
+          "rows": 3,
+          "placeholder": "<div>...</div>"
+        }
+      ]
+  }
+{% endschema %}

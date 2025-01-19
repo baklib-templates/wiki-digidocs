@@ -1,0 +1,145 @@
+<div class="bg-gray-50 border-t border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 py-3">
+        <div class="flex items-center text-sm text-gray-600">
+            <a href="../index.html" class="hover:text-gray-900">Home</a>
+            <span class="mx-2">/</span>
+            <a href="../topic/getting-started/index.html" class="hover:text-gray-900">Getting Started</a>
+            <span class="mx-2">/</span>
+            <span class="text-gray-900">Welcome to Ghost</span>
+        </div>
+    </div>
+</div>
+
+<!--{{教程}}-->
+<div class="max-w-3xl mx-auto px-4">
+    <div role="alert">
+    <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
+        模板使用教程
+    </div>
+    <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 space-y-2 text-sm text-red-700">
+        <p>将页面栏目的【页面设置】-> 【页面模板】选择为： Channel list</p>
+    </div>
+    </div>
+</div>
+<!--{{教程}}-->
+
+<main class="py-12">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="flex flex-wrap -mx-4">
+            <!-- Sidebar -->
+            <div class="w-full lg:w-1/4 px-4" x-data="{ searchOpen: false }">
+                <aside class="sticky top-4">
+                    <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+                        <div class="relative">
+                            <input type="text" 
+                                    class="w-full px-4 py-2 border rounded-lg"
+                                    placeholder="Search..."
+                                    @focus="searchOpen = true"
+                                    @click.away="searchOpen = false">
+                            
+                            <div x-show="searchOpen" 
+                                    class="absolute w-full bg-white border rounded-lg mt-2 shadow-lg">
+                                <!-- Search results go here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-sm p-6">
+                        <nav>
+                            <ul class="space-y-4">
+                                <li>
+                                    <div x-data="{ open: true }">
+                                        <button @click="open = !open" class="flex items-center justify-between w-full text-left">
+                                            <span class="font-medium">Getting Started</span>
+                                            <svg class="w-5 h-5 transform transition-transform" 
+                                                    :class="{ 'rotate-180': open }"
+                                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                            </svg>
+                                        </button>
+                                        <ul x-show="open" class="mt-2 ml-4 space-y-2">
+                                            <li><a href="../../welcome/index.html" class="text-gray-600 hover:text-gray-900">Welcome to Ghost</a></li>
+                                            <li><a href="../../the-editor/index.html" class="text-gray-600 hover:text-gray-900">Writing posts with Ghost</a></li>
+                                            <!-- Add other menu items -->
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div x-data="{ open: true }">
+                                        <button @click="open = !open" class="flex items-center justify-between w-full text-left">
+                                            <span class="font-medium">Getting Started</span>
+                                            <svg class="w-5 h-5 transform transition-transform" 
+                                                    :class="{ 'rotate-180': open }"
+                                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                            </svg>
+                                        </button>
+                                        <ul x-show="open" class="mt-2 ml-4 space-y-2">
+                                            <li><a href="../../welcome/index.html" class="text-gray-600 hover:text-gray-900">Welcome to Ghost</a></li>
+                                            <li><a href="../../the-editor/index.html" class="text-gray-600 hover:text-gray-900">Writing posts with Ghost</a></li>
+                                            <!-- Add other menu items -->
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div x-data="{ open: true }">
+                                        <button @click="open = !open" class="flex items-center justify-between w-full text-left">
+                                            <span class="font-medium">Getting Started</span>
+                                            <svg class="w-5 h-5 transform transition-transform" 
+                                                    :class="{ 'rotate-180': open }"
+                                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                            </svg>
+                                        </button>
+                                        <ul x-show="open" class="mt-2 ml-4 space-y-2">
+                                            <li><a href="../../welcome/index.html" class="text-gray-600 hover:text-gray-900">Welcome to Ghost</a></li>
+                                            <li><a href="../../the-editor/index.html" class="text-gray-600 hover:text-gray-900">Writing posts with Ghost</a></li>
+                                            <!-- Add other menu items -->
+                                        </ul>
+                                    </div>
+                                </li>
+                                <!-- Add other main menu items -->
+                            </ul>
+                        </nav>
+                    </div>
+                </aside>
+            </div>
+
+            <!-- Main content -->
+            <div class="w-full lg:w-3/4 px-4 mt-8 lg:mt-0">
+                <div class="bg-white rounded-lg shadow-sm p-8">
+                    <h1 class="text-4xl font-bold text-gray-900 mb-4">Getting Started</h1>
+                    <p class="text-lg text-gray-600 mb-8">Get up and running with Ghost quickly. This section will help you to know the initial key features.</p>
+                    
+                    <div class="space-y-6">
+                        <!-- Article cards -->
+                        <article class="border rounded-lg p-6 hover:shadow-md transition">
+                            <a href="/s/page" class="block">
+                                <h2 class="text-2xl font-bold text-gray-900 mb-2 flex items-center justify-between">
+                                    Welcome to Ghost
+                                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </h2>
+                                <p class="text-gray-600">Welcome, it's great to have you here. We know that first impressions are important, so we've populated your new site with some initial getting started posts that will help you get familiar with everything in no time.</p>
+                            </a>
+                        </article>
+                        
+                        <!-- Add other article cards -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- CTA Section -->
+<section class="bg-blue-50 mt-16">
+    <div class="max-w-7xl mx-auto px-4 py-16">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">Need help?</h2>
+            <p class="text-lg text-gray-600 mb-8">Have you any question which is not answered in this knowledge base? Contact us. We are here to help you.</p>
+            <a href="../../contact/index.html" class="inline-block bg-blue-600 text-white px-8 py-3 rounded-md hover:bg-blue-700">Contact us</a>
+        </div>
+    </div>
+</section>

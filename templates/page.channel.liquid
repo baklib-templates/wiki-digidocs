@@ -1,0 +1,135 @@
+{% assign default_icon = 'images/icon.svg' | asset_url %}
+
+{% comment %} 左侧 NavBar只显示当前父级栏目，具体做法： nav_tree_path 添加一个 parent 参数即可。 {% endcomment %}
+{% unless page.parent.path == '/' %}
+  {% assign parent = page.parent %}
+{% else %}
+  {% assign parent = page %}
+{% endunless %}
+
+{% assign sub_pages = page.children_in_list %}
+{% assign sub_pages_size = sub_pages | size %}
+{% assign default_avatar_url = 'images/avatar.svg' | asset_url %}
+
+<main class="py-12 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="flex flex-wrap -mx-4">
+            <!-- Sidebar -->
+            <div class="w-full lg:w-1/4 px-4" x-data="{ searchOpen: false }">
+                <aside class="sticky top-4">
+                    <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+
+                        {% form_tag 'search', class: 'relative' %}
+                            <input type="text" name="{{form.keywords_field_name}}" value="{{ search.keywords | escape_once }}"
+                                placeholder="{{ "placeholders.search" | t }}"
+                                class="w-full px-4 py-2 border rounded-lg"
+                                @focus="searchOpen = true"
+                                @click.away="searchOpen = false">
+                            
+                            <div x-show="searchOpen" 
+                                    class="absolute w-full bg-white border rounded-lg mt-2 shadow-lg">
+                            </div>
+                        {% endform_tag %}
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-sm p-6">
+                        <nav>
+                            <ul class="space-y-4">
+                                <turbo-frame
+                                  src="{{ site.nav_tree_path | append: '?selected_ids=' | append: page.id |  append: '?parent=' |  append: parent.id }}"
+                                  id="nav_tree"
+                                ></turbo-frame>
+                                <!-- Add other main menu items -->
+                            </ul>
+                        </nav>
+                    </div>
+                </aside>
+            </div>
+
+            <!-- Main content -->
+            <div class="w-full lg:w-3/4 px-4 mt-8 lg:mt-0">
+              <turbo-frame id="main-content" data-turbo-action="advance" :class="">
+                <div class="bg-white rounded-lg shadow-sm p-8">
+                    <h1 class="text-4xl font-bold text-gray-900 mb-4">{{ page.settings.title }}</h1>
+                    <p class="text-lg text-gray-600 mb-8">{{ page.settings.description }}</p>
+                    
+                    <div class="space-y-6">
+                      {% for sub_page in sub_pages %}
+                        {% assign desc = sub_page.settings.content | truncate: 80 | strip_html  %}
+                        <!-- Article cards -->
+                        <article class="border rounded-lg p-6 hover:shadow-md transition">
+                            <a href="{{ sub_page.path }}" class="block">
+                                <h2 class="text-lg lg:text-xl font-semibold text-gray-900 mb-2 flex items-center justify-between">
+                                    {{ sub_page.link_text }}
+                                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </h2>
+                                <p class="text-gray-600">{{ sub_page.settings.description | default: desc }}</p>
+                            </a>
+                        </article>
+                      {% endfor %}
+                    </div>
+                </div>
+              </turbo-frame>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- CTA Section -->
+<section class="bg-blue-50 mt-16">
+    <div class="max-w-7xl mx-auto px-4 py-16">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">Need help?</h2>
+            <p class="text-lg text-gray-600 mb-8">Have you any question which is not answered in this knowledge base? Contact us. We are here to help you.</p>
+            <a href="../../contact/index.html" class="inline-block bg-blue-600 text-white px-8 py-3 rounded-md hover:bg-blue-700">Contact us</a>
+        </div>
+    </div>
+</section>
+
+
+{% schema %}
+  {
+    "name": "Channel list",
+    "description": "a channel page list",
+    "thumb_url": "images/theme/page-channel.png",
+    "sub_page_templates": ["page"],
+    "settings": [
+      {
+        "id": "title",
+        "type": "text",
+        "readonly": true,
+        "label": "标题",
+        "info": "知识库同步，不可编辑"
+      },
+      {
+        "id": "tags",
+        "type": "tag_picker",
+        "multiple": true,
+        "label": "t:settings_schema.page.settings.tags.label"
+      },
+      {
+        "id": "description",
+        "type": "textarea",
+        "label": "t:settings_schema.page.settings.description.label"
+      },
+      {
+        "id": "icon",
+        "type": "image_picker",
+        "ratio": "1:1",
+        "width": 100,
+        "label": "t:settings_schema.page.settings.icon.label",
+        // "required": true, 如果必填就用这个参数
+        "info": "t:settings_schema.page.settings.icon.info"
+      },
+      {
+        "id": "content",
+        "type": "richtext",
+        "label": "t:settings_schema.page.settings.content.label",
+        "readonly": true,
+        "info": "t:settings_schema.page.settings.content.info"
+      }
+    ]
+  }
+{% endschema %}

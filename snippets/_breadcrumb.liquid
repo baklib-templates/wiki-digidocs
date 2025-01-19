@@ -1,0 +1,39 @@
+{% comment %}
+  @params breadcrumb
+    array of objects with keys:
+      link_text: string
+      path: string
+{% endcomment %}
+
+
+<nav class="flex justify-between mx-auto">
+  <div class="flex items-center space-x-4 divide-x-2 divide-gray-200">
+    <div class="items-center space-x-2 text-sm">
+      <ul class="list-none text-gray-600 flex items-center space-x-0">
+        {% for crumb in breadcrumb %}
+          <li>
+            <div class="flex items-center">
+              {% if forloop.last %}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4">
+                  <path fill-rule="evenodd"
+                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                    clip-rule="evenodd" />
+                </svg>
+                <a href="{{ crumb.path }}" data-turbo-frame="_top" class="break-all line-clamp-1">{{ 'generic.current' | t}}</a>
+              {% elsif forloop.index0 > 0 %}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4">
+                  <path fill-rule="evenodd"
+                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                    clip-rule="evenodd" />
+                </svg>
+                <a href="{{ crumb.path }}" data-turbo-frame="_top" class="break-all line-clamp-1">{{ crumb.link_text }}</a>
+              {% else %}
+                <a href="{{ crumb.path }}" data-turbo-frame="_top" class="break-all block">{{ crumb.link_text }}</a>
+              {% endif %}
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</nav>
