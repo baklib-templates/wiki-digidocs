@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ site.language }}" class="scroll-smooth">
+<html lang="{{ site.language }}" class="scroll-smooth h-full">
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,7 +12,7 @@
     {% if false %}{{ 'javascripts/cdn.tailwindcss.js' | asset_url | script_tag: data-turbo-track: 'reload' }} {% endif %}
     {{ site.settings.head_html }}
   </head>
-  <body class="h-screen font-sans antialiased text-gray-700" id="js-body" x-data="{ header_navtree_show: false }">
+  <body class="h-full font-sans antialiased text-gray-700" id="js-body" x-data="{ header_navtree_show: false }">
     <div class="min-h-screen">
       {% render 'header' %}
       {{ content_for_layout }}

@@ -1,7 +1,9 @@
 {% assign default_icon = 'images/icon.svg' | asset_url %}
 {% assign default_hero = 'images/demo/jason-goodman-6awfTPLGaCE-unsplash.jpg' | asset_url %}
 {% assign card_pages = site.pages['/'].children_in_nav_menu  | limit: 24 %}
-{% assign faq_pages = site.pages['/faq'].children_in_nav_menu  | limit: 8 %}
+{% assign faq_channel = site.pages['/faq'] %}
+{% assign faq_pages = faq_channel.children_in_nav_menu  | limit: 8 %}
+
 
 <!-- Hero Section with Search -->
 <div class="bg-gradient-to-r from-primary to-primary-600 pt-12 pb-24 lg:pt-20 lg:pb-60">
@@ -65,7 +67,7 @@
     <!-- FAQ Section -->
     <section class="bg-gray-50 py-12 mt-12">
         <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center text-gray-900 mb-8">FAQ</h2>
+            <h2 class="text-3xl font-bold text-center text-gray-900 mb-8">{{ faq_channel.link_text }}</h2>
             <div class="max-w-3xl mx-auto space-y-4">
                 {% for faq_page in faq_pages %}
                     <a href="{{ faq_page.path }}" class="block bg-white rounded-lg shadow-sm p-4 hover:shadow-md transition-shadow">
@@ -79,7 +81,7 @@
                 {% endfor %}
             </div>
             <div class="text-center mt-8">
-                <a href="/faq" class="inline-block px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary-700 transition-colors">
+                <a href="{{ faq_channel.path }}" class="inline-block px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary-700 transition-colors">
                     {{ 'generic.read_more' | t }}
                 </a>
             </div>
@@ -88,19 +90,7 @@
 </main>
 
 <!-- Contact CTA -->
-<section class="my-0 lg:my-12">
-    <div class="max-w-7xl mx-auto px-4 lg:px-12 bg-primary text-white py-4 lg:py-12 rounded-lg">
-        <div class="flex flex-col md:flex-row items-center justify-between">
-            <div class="text-center md:text-left mb-6 md:mb-0">
-                <h2 class="text-2xl font-bold mb-2">Need help?</h2>
-                <p class="text-primary-100">Have you any question which is not answered in this knowledge base? Contact us. We are here to help you.</p>
-            </div>
-            <a href="/contact" class="px-6 py-3 bg-white text-primary-600 rounded-lg hover:bg-primary-50 transition-colors">
-                Contact us
-            </a>
-        </div>
-    </div>
-</section>
+{% render 'features_two' %}
 
 {% schema %}
   {

@@ -11,47 +11,33 @@
 {% assign sub_pages_size = sub_pages | size %}
 {% assign default_avatar_url = 'images/avatar.svg' | asset_url %}
 
-<main class="py-12 bg-gray-50">
+<main class="py-4 lg:py-10 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4">
         <div class="flex flex-wrap -mx-4">
-            <!-- Sidebar -->
-            <div class="w-full lg:w-1/4 px-4" x-data="{ searchOpen: false }">
+            <div class="w-full lg:w-1/4 px-4 hidden md:block">
                 <aside class="sticky top-4">
-                    <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
-
-                        {% form_tag 'search', class: 'relative' %}
-                            <input type="text" name="{{form.keywords_field_name}}" value="{{ search.keywords | escape_once }}"
-                                placeholder="{{ "placeholders.search" | t }}"
-                                class="w-full px-4 py-2 border rounded-lg"
-                                @focus="searchOpen = true"
-                                @click.away="searchOpen = false">
-                            
-                            <div x-show="searchOpen" 
-                                    class="absolute w-full bg-white border rounded-lg mt-2 shadow-lg">
-                            </div>
-                        {% endform_tag %}
-                    </div>
-
                     <div class="bg-white rounded-lg shadow-sm p-6">
-                        <nav>
-                            <ul class="space-y-4">
-                                <turbo-frame
-                                  src="{{ site.nav_tree_path | append: '?selected_ids=' | append: page.id |  append: '?parent=' |  append: parent.id }}"
-                                  id="nav_tree"
-                                ></turbo-frame>
-                                <!-- Add other main menu items -->
-                            </ul>
-                        </nav>
+                        <h3 class="text-sm font-semibold text-gray-900 uppercase mb-4">{{ 'generic.menu' | t}}</h3>
+                        <ul class="space-y-2 overflow-x-auto" id="version-list">
+                          <turbo-frame
+                            src="{{ site.nav_tree_path | append: '?selected_ids=' | append: page.id }}"
+                            id="nav_tree"
+                          ></turbo-frame>
+                        </ul>
                     </div>
                 </aside>
             </div>
 
-            <!-- Main content -->
-            <div class="w-full lg:w-3/4 px-4 mt-8 lg:mt-0">
+            <div class="w-full lg:w-3/4 px-4">
               <turbo-frame id="main-content" data-turbo-action="advance" :class="">
                 <div class="bg-white rounded-lg shadow-sm p-8">
-                    <h1 class="text-4xl font-bold text-gray-900 mb-4">{{ page.settings.title }}</h1>
-                    <p class="text-lg text-gray-600 mb-8">{{ page.settings.description }}</p>
+                    <div class="flex items-center space-x-4">
+                      <img src="{{ page.settings.icon | default: default_icon }}" alt="{{ page.link_text }}" class="h-16">
+                      <div>
+                        <h2 class="text-2xl font-semibold tracking-tight text-gray-900 sm:text-3xl lg:text-4xl mb-2">{{ page.settings.title}}</h2>
+                        <p class="text-gray-500 mb-4">{{ page.settings.description }}</p>
+                      </div>
+                    </div>
                     
                     <div class="space-y-6">
                       {% for sub_page in sub_pages %}
@@ -76,17 +62,6 @@
         </div>
     </div>
 </main>
-
-<!-- CTA Section -->
-<section class="bg-blue-50 mt-16">
-    <div class="max-w-7xl mx-auto px-4 py-16">
-        <div class="max-w-3xl mx-auto text-center">
-            <h2 class="text-3xl font-bold text-gray-900 mb-4">Need help?</h2>
-            <p class="text-lg text-gray-600 mb-8">Have you any question which is not answered in this knowledge base? Contact us. We are here to help you.</p>
-            <a href="../../contact/index.html" class="inline-block bg-blue-600 text-white px-8 py-3 rounded-md hover:bg-blue-700">Contact us</a>
-        </div>
-    </div>
-</section>
 
 
 {% schema %}

@@ -14,52 +14,48 @@ Wiki template deployed by Baklib.
 
 ```
   .
-  ├── README.md
-  ├── config
-  │   └── settings_schema.json
-  ├── layout
-  │   └── theme.liquid
-  ├── package-lock.json
-  ├── package.json
-  ├── snippets
-  │   ├── _aside.liquid
-  │   ├── _breadcrumb.liquid
-  │   ├── _custom_menu.liquid
-  │   ├── _export_page.liquid
-  │   ├── _export_tree.liquid
-  │   ├── _feedback_form.liquid
-  │   ├── _footer.liquid
-  │   ├── _header.liquid
-  │   ├── _page.liquid
-  │   ├── _page_list.liquid
-  │   ├── _paginate.liquid
-  │   ├── _plugins.liquid
-  │   ├── _popular_pages.liquid
-  │   ├── _sidebar.liquid
-  │   ├── _tag.liquid
-  │   └── _tree.liquid
-  ├── statics
-  │   ├── about.liquid
-  │   ├── faq-item.liquid
-  │   ├── faq-simple.liquid
-  │   ├── faq-toggle-cards.liquid
-  │   ├── faq-toggle.liquid
-  │   ├── digidocs-dashboard-alternative.liquid
-  │   ├── digidocs-dashboard.liquid
-  │   └── digidocs-page.liquid
-  ├── tailwind.config.js
-  ├── templates
-  │   ├── index.docs.liquid
-  │   ├── index.faqs.liquid
-  │   ├── index.pages.liquid
-  │   ├── nav_tree.liquid
-  │   ├── page.channel.liquid
-  │   ├── page.export.liquid
-  │   ├── page.liquid
-  │   ├── search.liquid
-  │   └── tag.liquid
-  ├── yarn-error.log
-  └── yarn.lock
+├── README.md
+├── config
+│   └── settings_schema.json
+├── layout
+│   └── theme.liquid
+├── package-lock.json
+├── package.json
+├── snippets
+│   ├── _breadcrumb.liquid
+│   ├── _custom_menu.liquid
+│   ├── _export_page.liquid
+│   ├── _export_tree.liquid
+│   ├── _feedback_form.liquid
+│   ├── _footer.liquid
+│   ├── _header.liquid
+│   ├── _paginate.liquid
+│   ├── _plugins.liquid
+│   ├── _popular_pages.liquid
+│   ├── _recent_pages.liquid
+│   ├── _sidebar.liquid
+│   ├── _tag.liquid
+│   └── _tree.liquid
+├── statics
+│   ├── about.liquid
+│   ├── changelog.liquid
+│   ├── channel.liquid
+│   ├── faq.liquid
+│   ├── index.liquid
+│   └── page.liquid
+├── tailwind.config.js
+├── templates
+│   ├── index.cards.liquid
+│   ├── index.list.liquid
+│   ├── nav_tree.liquid
+│   ├── page.channel.liquid
+│   ├── page.faq.liquid
+│   ├── page.liquid
+│   ├── page.side.liquid
+│   ├── search.liquid
+│   └── tag.liquid
+├── yarn-error.log
+└── yarn.lock
 ```
 
 
